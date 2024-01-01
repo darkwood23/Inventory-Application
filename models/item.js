@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const ItemSchema = new Schema({
     title: { type: String, required: true },
-    category: { type: String, required: true, ref: "Category"},
+    category: [{ type: Schema.Types.ObjectId, ref: "Category"}],
     stock: { type: Number, required: true},
     description: { type: String, required: true}
 })
