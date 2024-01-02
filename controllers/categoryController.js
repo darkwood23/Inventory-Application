@@ -53,7 +53,7 @@ exports.category_create_post = [
     body("title", "Category title must contain at least 3 characters")
         .trim()
         .isLength({min: 3})
-        .exec(),
+        .escape(),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
 
