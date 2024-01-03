@@ -4,13 +4,13 @@ const { body, validationResult } = require("express-validator")
 
 const asyncHandler = require("express-async-handler")
 
-exports.list = asyncHandler(async (req, res, next) => {
+exports.item_list = asyncHandler(async (req, res, next) => {
     const [category, item] = Promise.all([
         Category.find().exec(),
         Item.find().exec(),
     ])
 
-    res.render("list", {
+    res.render("item_list", {
         title: "All books",
         category: category,
         item: item

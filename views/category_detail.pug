@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+
+    h1 title
+    h2 #[em category.title]
+
+    each item in items_in_category 
+        li 
+            a(href=item.url) #{item.title}
+        
+    else 
+        p Sorry, there are no items avaliable

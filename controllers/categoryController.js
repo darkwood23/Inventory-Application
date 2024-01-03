@@ -8,21 +8,24 @@ exports.index = asyncHandler(async (req, res, next) => {
     const [
         numCategories,
         numItems,
-        categories,
-        items
     ] = await Promise.all([
         Category.countDocuments({}).exec(),
         Item.countDocuments({}).exec(),
-        Category.find({}).sort({title: 1}).exec(),
-        Item.find({}).exec()
     ])
 
     res.render("index", {
         title: "Elektronik Management",
         num_categories: numCategories,
         num_items: numItems,
-        categories: categories,
-        items: items,
+    })
+})
+
+exports.category_list = asyncHandler(async (req, res, next) => {
+    const allCategories = await Category.find().exec()
+
+    res.render("category_list", {
+        title: "Categories",
+        all_categories: allCategories
     })
 })
 
@@ -86,7 +89,7 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
         return next(err)
     }
 
-    res.render("category_update", {
+    res.render("category_form", {
         title: "Update Category",
         category: category
     })
