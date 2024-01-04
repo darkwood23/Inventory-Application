@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1 #{title}
+
+    ul 
+        each item in all_items 
+            li 
+                a(href=item.url) #{item.title} 
+                | #{item.category} #{item.stock}
+        else 
+            p Sorry, there are no items at this moment.

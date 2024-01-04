@@ -1,0 +1,26 @@
+extends layout 
+
+block content 
+
+    h1 #{title}
+
+    form(method='POST', action='')
+        .form-group 
+            label(for='title') Title: 
+            input#title.form-control(type='text', name='title', value=(undefined=== item ? '' : item.title))
+        .form-group 
+            label(for='category') Category: 
+            select#category.form-control(type='select', placeholder='Select Category', name='category', required='true')
+                for category in category_list 
+                    if item
+                        option(value=category._id, selected=(category._id.toString()=== book.author._id.toString() ? 'selected': false)) #{category.title}
+                    else 
+                        option(value=category._id) #{category.title}
+        .form-group 
+            label(for='stock') Stock: 
+            input#stock.form-control(type='number', name='stock', value=(undefined=== item ? '' : item.stock))
+        .form-group 
+            label(for='description') Description: 
+            textarea#description.form-control(name="description", cols="30", rows="10", required='true', placeholder='description', value=(undefined=== item ? '' : item.description))
+
+        button(type='submit') Submit 

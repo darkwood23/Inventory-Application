@@ -18,7 +18,7 @@ block content
     else 
         p Do you really want to delete this category?
 
-        form(action='' method='POST')
+        form(action='', method='POST')
             .form-group 
                 input#categoryid.form-control(type='hidden', name='categoryid', required='true', value=category._id )
             button.btn.btn-primary(type='submit') Delete 
