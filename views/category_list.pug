@@ -8,6 +8,7 @@ block content
         each category in all_categories 
             li 
                 a(href=category.url) #{category.title}
+                | #{category.description}
         
         else 
             p Sorry, there are no categories avaliable

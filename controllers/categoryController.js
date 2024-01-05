@@ -32,7 +32,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 exports.category_detail = asyncHandler(async (req, res, next) => {
     const [category, itemsInCategory] = await Promise.all([
         Category.find(req.params.id).exec(),
-        Item.find({category: req.params.id}, "title stock").exec()
+        Item.find({category: req.params.id}, "title stock price").exec()
     ])
 
     if(category === null) {
@@ -56,6 +56,10 @@ exports.category_create_post = [
     body("title", "Category title must contain at least 3 characters")
         .trim()
         .isLength({min: 3})
+        .escape(),
+    body("description", "Category description must contain at least 10 characters")
+        .trim()
+        .isLength({ min: 10})
         .escape(),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
@@ -100,7 +104,10 @@ exports.category_update_post = [
         .trim()
         .isLength({ min: 3 })
         .exec(),
-    
+    body('description', "Category description must be at least 10 characters")
+        .trim()
+        .isLength({ min: 10})
+        .escape(),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
 

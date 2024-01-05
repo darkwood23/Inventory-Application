@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const CateogrySchema = new Schema({
     title: { type: String, required: true},
+    description: {type: String, required: true}
 })
 
 CateogrySchema.virtual("url").get(() => {

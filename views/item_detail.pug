@@ -7,3 +7,10 @@ block content
     p #[strong Category:] #{item.category}
     p #[strong Stock:] #{item.stock}
     p #[strong Description:] #{item.description}
+    p #[strong Price:] #{item.price}
+
+    hr
+    p 
+        a(href=item.url+'/delete') Delete Item
+    p 
+        a(href=item.url+'/update') Update Item

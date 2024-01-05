@@ -48,6 +48,9 @@ exports.item_create_post = [
         .trim()
         .isLength({min: 10})
         .escape(),
+    body("price", "Item price must be defined")
+        .trim()
+        .escape(),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
 
@@ -111,6 +114,9 @@ exports.item_update_post = [
         .trim()
         .isLength({min: 10})
         .escape(),
+    body("price", "Item price must be defined")
+        .trim()
+        .escape(),
     
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
@@ -120,6 +126,7 @@ exports.item_update_post = [
             category: req.body.category,
             stock: req.body.stock,
             description: req.body.description,
+            item: req.body.price,
             _id: req.params.id
         })
 
@@ -150,7 +157,7 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
     }
 
     res.render("item_delete", {
-        title: "Delte Item",
+        title: "Delete Item",
         item: item
     })
 })

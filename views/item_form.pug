@@ -22,5 +22,8 @@ block content
         .form-group 
             label(for='description') Description: 
             textarea#description.form-control(name="description", cols="30", rows="10", required='true', placeholder='description', value=(undefined=== item ? '' : item.description))
+        .form-group 
+            label(for='price') Price: 
+            input#price.form-control(name='price', required='true', value=(undefined=== item ? '' : item.price))
 
         button(type='submit') Submit 

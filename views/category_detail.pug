@@ -5,9 +5,17 @@ block content
     h1 #{title}
     h2 #[em category.title]
 
+    p #{category.description}
+
     each item in items_in_category 
         li 
             a(href=item.url) #{item.title}
         
     else 
         p Sorry, there are no items avaliable
+
+    hr
+    p 
+        a(href=category.url+'/delete') Delete Category
+    p 
+        a(href=category.url+'/update') Update Category

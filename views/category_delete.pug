@@ -13,7 +13,7 @@ block content
             each item in category_item 
                 dt 
                     a(href=item.url) #{item.title}
-                dd #{item.description}
+                dd #{item.description} $#{item.price}
     
     else 
         p Do you really want to delete this category?
