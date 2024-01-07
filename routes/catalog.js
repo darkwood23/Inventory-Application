@@ -27,12 +27,12 @@ router.post("/category/:id/update", category_controller.category_update_post)
 
 // Item
 router.get("/item", item_controller.item_list)
-router.get("/item/:id", item_controller.item_detail)
-
 // Create
 router.get("/item/create", item_controller.item_create_get)
 
 router.post("/item/create", item_controller.item_create_post)
+
+router.get("/item/:id", item_controller.item_detail)
 
 // Delete
 router.get("/item/:id/delete", item_controller.item_delete_get)

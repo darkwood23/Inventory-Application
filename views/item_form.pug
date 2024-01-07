@@ -13,7 +13,7 @@ block content
             select#category.form-control(type='select', placeholder='Select Category', name='category', required='true')
                 for category in category_list 
                     if item
-                        option(value=category._id, selected=(category._id.toString()=== book.author._id.toString() ? 'selected': false)) #{category.title}
+                        option(value=category._id, selected=(category._id.toString()=== item.category._id.toString() ? 'selected': false)) #{category.title}
                     else 
                         option(value=category._id) #{category.title}
         .form-group 
@@ -21,9 +21,9 @@ block content
             input#stock.form-control(type='number', name='stock', value=(undefined=== item ? '' : item.stock))
         .form-group 
             label(for='description') Description: 
-            textarea#description.form-control(name="description", cols="30", rows="10", required='true', placeholder='description', value=(undefined=== item ? '' : item.description))
+            input#description.form-control(type='text', name="description", required='true', placeholder='description', value=(undefined=== item ? '' : item.description))
         .form-group 
-            label(for='price') Price: 
-            input#price.form-control(name='price', required='true', value=(undefined=== item ? '' : item.price))
+            label(for='price') Price ($USD): 
+            input#price.form-control(type='number', name='price', required='true', value=(undefined=== item ? '' : item.price))
 
-        button(type='submit') Submit 
+        button.btn.btn-primary(type='submit') Submit 

@@ -58,7 +58,8 @@ exports.item_create_post = [
             title: req.body.title,
             category: req.body.category,
             stock: req.body.stock,
-            description: req.body.description
+            description: req.body.description,
+            price: req.body.price
         })
 
         if(!errors.isEmpty()) {
@@ -126,7 +127,7 @@ exports.item_update_post = [
             category: req.body.category,
             stock: req.body.stock,
             description: req.body.description,
-            item: req.body.price,
+            price: req.body.price,
             _id: req.params.id
         })
 
@@ -165,5 +166,5 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
     await Item.findByIdAndDelete(req.body.itemid)
 
-    res.redirect("/catalog/category")
+    res.redirect("/catalog/item")
 })
