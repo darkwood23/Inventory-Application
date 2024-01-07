@@ -18,6 +18,7 @@ exports.index = asyncHandler(async (req, res, next) => {
         num_categories: numCategories,
         num_items: numItems,
     })
+    // res.send("hello")
 })
 
 exports.category_list = asyncHandler(async (req, res, next) => {
@@ -31,8 +32,8 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 
 exports.category_detail = asyncHandler(async (req, res, next) => {
     const [category, itemsInCategory] = await Promise.all([
-        Category.find(req.params.id).exec(),
-        Item.find({category: req.params.id}, "title stock price").exec()
+        Category.findById(req.params.id).exec(),
+        Item.find({category: req.params.id}, "title stock").exec()
     ])
 
     if(category === null) {
@@ -50,6 +51,7 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 
 exports.category_create_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", { title: "Create Category" })
+    // res.send("hello")
 })
 
 exports.category_create_post = [
@@ -64,7 +66,7 @@ exports.category_create_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req)
 
-        const category = new Category({ title: req.body.title })
+        const category = new Category({ title: req.body.title, description: req.body.description })
 
         if (!errors.isEmpty()) {
             res.render("category_form", {
@@ -103,7 +105,7 @@ exports.category_update_post = [
     body('title', "Category title must contain at least 3 characters")
         .trim()
         .isLength({ min: 3 })
-        .exec(),
+        .escape(),
     body('description', "Category description must be at least 10 characters")
         .trim()
         .isLength({ min: 10})
@@ -113,6 +115,7 @@ exports.category_update_post = [
 
         const category = new Category({
             title: req.body.title,
+            description: req.body.description,
             _id: req.params.id
         })
 
@@ -161,6 +164,6 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
         return
     } else {
         await Category.findByIdAndDelete(req.body.categoryid)
-        res.redirect('/catalog/categories')
+        res.redirect('/catalog/category')
     }
 })

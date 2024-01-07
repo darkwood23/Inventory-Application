@@ -4,13 +4,13 @@ block content
     h1 #{title} 
 
     form(method='POST', action='')
-        .form-group 
+        div.form-group 
             label(for='title') Title: 
             input#title.form-control(type='text', placeholder='computer, storage device etc.', name='title', value=(undefined=== category ? '' : category.title ))
-        .form-group 
+        div.form-group 
             label(for='description') Description: 
-            textarea#description.form-control(name="description", cols="30", rows="10", value=(undefined=== category ? '' : category.description))
-        button.btn.btn-primary(type='submit') Submit 
+            input#description.form-control(type='textarea', name="description", cols="30", rows="10", value=(undefined=== category ? '' : category.description))
+        button.btn.btn-primary(type='submit') Submit
     
     if errors 
         ul 

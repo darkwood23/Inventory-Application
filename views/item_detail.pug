@@ -2,9 +2,9 @@ extends layout
 
 block content 
     h1 #{title}
-    h2 #[em item.title]
+    h2 #[em #{item.title}]
 
-    p #[strong Category:] #{item.category}
+    p #[strong Category:] #{item.category.title}
     p #[strong Stock:] #{item.stock}
     p #[strong Description:] #{item.description}
     p #[strong Price:] #{item.price}

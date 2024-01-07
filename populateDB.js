@@ -8,7 +8,7 @@ console.log(
 const userArgs = process.argv.slice(2);
 
 const Category = require("./models/category")
-const Item = require("./models/category")
+const Item = require("./models/item")
 
 const categories = []
 const items = []
@@ -33,21 +33,23 @@ async function main() {
 // We pass the index to the ...Create functions so that, for example,
 // genre[0] will always be the Fantasy genre, regardless of the order
 // in which the elements of promise.all's argument complete.
-async function itemCreate(index, title, category, stock, description) {
+async function itemCreate(index, title, category, stock, description, price) {
   const item = new Item({ 
     title: title,
     category: category,
     stock: stock,
-    description: description
+    description: description,
+    price: price
   });
   await item.save();
   items[index] = item;
   console.log(`Added item: ${title}`);
 }
 
-async function categoryCreate(index, title) {
+async function categoryCreate(index, title, description) {
   const category = new Category({
-    title: title
+    title: title,
+    description: description
   })
   await category.save()
   categories[index] = category
@@ -57,17 +59,17 @@ async function categoryCreate(index, title) {
 async function createItems() {
   console.log("Adding genres");
   await Promise.all([
-    itemCreate(0, "Mouse", "Accessory", 10, "Helps you game."),
-    itemCreate(1, "Laptop", "Computer", 2, "A way to connect."),
-    itemCreate(2, "Pendrive", "Storage-Device", 16, "A way to store your files and take them anywhere"),
+    itemCreate(0, "Mouse", categories[0], 10, "Helps you game.", 30),
+    itemCreate(1, "Laptop", categories[2], 2, "A way to connect.", 1200),
+    itemCreate(2, "Pendrive", categories[1], 16, "A way to store your files and take them anywhere", 120),
   ]);
 }
 
 async function createCategories() {
   console.log("Adding Categories")
   await Promise.all([
-    categoryCreate(0, "Computer Accesories"),
-    categoryCreate(1, "Storage Devices"),
-    categoryCreate(2, "Computers")
+    categoryCreate(0, "Computer Accesories", "Accesories for your computer"),
+    categoryCreate(1, "Storage Devices", "Storage Devices such as pendrives and ssd for your electronic devices"),
+    categoryCreate(2, "Computers", "Electronic Devices that help you connect")
   ])
 }

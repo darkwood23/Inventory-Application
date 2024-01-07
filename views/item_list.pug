@@ -7,7 +7,7 @@ block content
         each item in all_items 
             li 
                 a(href=item.url) #{item.title} 
-                | #{item.category} 
+                | #{item.category.title} 
                 | #{item.stock}
                 | $#{item.price}
         else 

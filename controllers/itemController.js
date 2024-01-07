@@ -5,18 +5,18 @@ const { body, validationResult } = require("express-validator")
 const asyncHandler = require("express-async-handler")
 
 exports.item_list = asyncHandler(async (req, res, next) => {
-    const allItems = await Item.find().sort({ title: 1} ).exec()
+    const allItems = await Item.find().populate("category").sort({ title: 1} ).exec()
 
     res.render("item_list", {
-        title: "All books",
+        title: "Items",
         all_items: allItems
     })
 })
 
 exports.item_detail = asyncHandler(async (req, res, next) => {
-    const item = await Item.find(req.params.id).populate("category").exec()
+    const selectedItem = await Item.findById(req.params.id).populate("category").exec()
 
-    if (item === null) {
+    if (selectedItem === null) {
         const err = new Error("Item not found")
         err.status = 404
         return next(err)
@@ -24,7 +24,7 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 
     res.render("item_detail", {
         title: "Item Detail",
-        item: item
+        item: selectedItem
     })
 })
 
@@ -153,7 +153,7 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
     const item = await Item.findById(req.params.id).populate("category").exec()
 
     if(item === null) {
-        res.redirect("/catalog/category")
+        res.redirect("/catalog/item")
     }
 
     res.render("item_delete", {

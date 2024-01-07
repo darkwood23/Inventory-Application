@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+// const catalog = require("catalog")
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res) {
   res.redirect("/catalog")
 });
 
